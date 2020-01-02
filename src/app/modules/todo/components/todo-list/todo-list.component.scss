@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  app-todo {
+    margin: 0 5px;
+  }
+  .viewport {
+    display: block;
+    width: 100%;
+  }
+}
