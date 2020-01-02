@@ -9,3 +9,16 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: rgba(0, 0, 0, 0.04);
 }
+
+.block {
+  display: block;
+}
+
+@for $i from 1 through 100 {
+  .push-#{$i} {
+    margin-bottom: #{$i}px;
+  }
+  .push-#{$i}-l {
+    margin-left: #{$i}px;
+  }
+}

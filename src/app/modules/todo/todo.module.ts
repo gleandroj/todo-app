@@ -7,7 +7,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatRippleModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -16,13 +20,15 @@ import { TodoPageComponent } from './pages/todo-page/todo-page.component';
 import { TodoLayoutComponent } from './components/todo-layout/todo-layout.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { TodoFilterComponent } from './components/todo-filter/todo-filter.component';
 
 @NgModule({
   declarations: [
     TodoPageComponent,
     TodoLayoutComponent,
     TodoComponent,
-    TodoListComponent
+    TodoListComponent,
+    TodoFilterComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +40,11 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
     MatTooltipModule,
     MatButtonModule,
     MatRippleModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     ScrollingModule,
     TodoRoutingModule
   ]

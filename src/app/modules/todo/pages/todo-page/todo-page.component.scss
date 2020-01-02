@@ -1,6 +1,6 @@
 :host {
   display: flex;
-  height: calc(100% - 56px - 20px); //56px toolbar, 20px padding
+  height: calc(100% - 56px - 40px - 200px); //56px toolbar, 40px padding, 200px filter
   width: 100%;
   .mat-fab-container {
     position: fixed;
