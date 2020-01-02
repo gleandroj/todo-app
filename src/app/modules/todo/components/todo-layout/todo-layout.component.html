@@ -1,0 +1,8 @@
+<mat-toolbar color="primary" class="mat-elevation-z2">
+    <span>Todo App</span>
+    <span fxFlex></span>
+    <button *ngFor="let menu of menus" mat-icon-button [attr.aria-label]="menu.title" [matTooltip]="menu.title">
+        <mat-icon>{{ menu.matIcon }}</mat-icon>
+    </button>
+</mat-toolbar>
+<router-outlet></router-outlet>
