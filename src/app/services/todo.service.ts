@@ -7,7 +7,7 @@ import { TodoModel, TodoPriority } from '../models/todo.model';
 
 const randomDate = (start: Date, end: Date) => (new Date(+start + Math.random() * (+end - +start)))
 
-const bigDescription = (new Array(100))
+const bigDescription = (new Array(10))
     .fill(() => { }).map((a, i) => `${i}`).join('');
 
 const testData = (new Array(10))
