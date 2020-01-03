@@ -17,6 +17,7 @@ import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { TodoRoutingModule } from './todo-routing.module';
 import { TodoPageComponent } from './pages/todo-page/todo-page.component';
@@ -57,6 +58,7 @@ import { TodoFormDialogComponent } from './dialogs/todo-form-dialog/todo-form-di
     ScrollingModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatProgressBarModule,
     TodoRoutingModule
   ]
 })
