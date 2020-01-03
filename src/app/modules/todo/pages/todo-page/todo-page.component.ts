@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { TodoModel } from '../../../../models/todo.model';
@@ -17,7 +17,7 @@ import { TodoFormDialogComponent } from '../../dialogs/todo-form-dialog/todo-for
   templateUrl: './todo-page.component.html',
   styleUrls: ['./todo-page.component.scss']
 })
-export class TodoPageComponent implements OnInit {
+export class TodoPageComponent implements OnInit, OnDestroy {
 
   public todos$: Observable<TodoModel[]>;
   public loading$: Observable<boolean>;
@@ -41,9 +41,17 @@ export class TodoPageComponent implements OnInit {
   }
 
   todoClick(todo: TodoModel) {
-    this.mdDialog.open(TodoFormDialogComponent, {
+    const ref = this.mdDialog.open(TodoFormDialogComponent, {
       data: todo
     });
   }
+
+  addTodo() {
+    const ref = this.mdDialog.open(TodoFormDialogComponent, {
+      data: {}
+    });
+  }
+
+  ngOnDestroy(): void { }
 
 }
