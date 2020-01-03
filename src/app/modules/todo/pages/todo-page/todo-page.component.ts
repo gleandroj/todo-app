@@ -9,6 +9,8 @@ import {
   fetchTodo
 } from '../../../../../app/root-store/todo-feature';
 import * as RootStore from '../../../../../app/root-store';
+import { MatDialog } from '@angular/material/dialog';
+import { TodoFormDialogComponent } from '../../dialogs/todo-form-dialog/todo-form-dialog.component';
 
 @Component({
   selector: 'app-todo-page',
@@ -21,7 +23,10 @@ export class TodoPageComponent implements OnInit {
   public loading$: Observable<boolean>;
   public error$: Observable<any>;
 
-  constructor(private store$: Store<RootStore.State>) {
+  constructor(
+    private store$: Store<RootStore.State>,
+    private mdDialog: MatDialog
+  ) {
     this.loading$ = this.store$.select(selectTodoLoading);
     this.todos$ = this.store$.select(selectTodoData);
     this.error$ = this.store$.select(selectTodoError);
@@ -32,11 +37,13 @@ export class TodoPageComponent implements OnInit {
   }
 
   filter(filter: Partial<TodoModel>) {
-    this.store$.dispatch(fetchTodo({ filter: filter }))
+    this.store$.dispatch(fetchTodo({ filter }));
   }
 
   todoClick(todo: TodoModel) {
-    //this.store$.dispatch(editTodo(todo))
+    this.mdDialog.open(TodoFormDialogComponent, {
+      data: todo
+    });
   }
 
 }

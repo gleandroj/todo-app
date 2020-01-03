@@ -1,6 +1,6 @@
 import { MetaReducer, ActionReducer } from '@ngrx/store';
 
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import * as Todo from './todo-feature';
 
 export interface State {
