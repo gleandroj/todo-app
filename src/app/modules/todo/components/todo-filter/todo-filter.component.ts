@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angu
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { distinctUntilChanged, debounceTime, tap } from 'rxjs/operators';
-import { TodoModel } from 'src/app/models/todo.model';
+import { TodoModel, todoPriorities } from '../../../../models/todo.model';
 
 @Component({
   selector: 'app-todo-filter',
@@ -11,7 +11,7 @@ import { TodoModel } from 'src/app/models/todo.model';
 })
 export class TodoFilterComponent implements OnInit, OnDestroy {
 
-  public priorities = [null, 1, 2, 3, 4, 5];
+  public priorities = [null].concat(todoPriorities);
   public form: FormGroup;
 
   @Input() public debounceTime: number = 500;

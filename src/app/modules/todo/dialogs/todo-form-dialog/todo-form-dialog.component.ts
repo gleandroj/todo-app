@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { TodoModel } from 'src/app/models/todo.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TodoModel, todoPriorities } from 'src/app/models/todo.model';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -10,22 +10,24 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class TodoFormDialogComponent implements OnInit {
   public form: FormGroup;
-  public priorities = [null, 1, 2, 3, 4, 5];//TODO: Put inside model
+  public priorities = todoPriorities;
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private todo: Partial<TodoModel>
+    @Inject(MAT_DIALOG_DATA) public todo: Partial<TodoModel>
   ) { }
 
   ngOnInit() {
     this.form = this.fb.group({
       _id: [this.todo._id],
-      title: [this.todo.title],
-      description: [this.todo.description],
-      priority: [this.todo.priority],
-      createdAt: [this.todo.createdAt],
+      title: [this.todo.title, [Validators.required]],
+      description: [this.todo.description, []],
+      priority: [this.todo.priority, [Validators.required]],
+      createdAt: [this.todo.createdAt || new Date()],
       isDone: [this.todo.isDone]
     });
+
+    this.form.get('createdAt').disable();
   }
 
 }
