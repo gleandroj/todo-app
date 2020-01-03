@@ -1,22 +1,26 @@
 <mat-expansion-panel>
     <mat-expansion-panel-header>
-        <mat-panel-title>
+        <mat-panel-title class="title-header">
             Filtro
         </mat-panel-title>
+        <button (click)="reset($event)" class="push-10-r" mat-button mat-icon-button mat-raised matTooltip="Limpar"
+            color="accent">
+            <mat-icon>delete</mat-icon>
+        </button>
     </mat-expansion-panel-header>
 
-    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap.gt-sm="10px">
+    <div [formGroup]="form" fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap.gt-sm="10px">
         <mat-form-field fxFlex appearance="outline">
             <mat-label>Título</mat-label>
-            <input matInput>
+            <input formControlName="title" matInput>
         </mat-form-field>
         <mat-form-field fxFlex appearance="outline">
             <mat-label>Descrição</mat-label>
-            <input matInput>
+            <input formControlName="description" matInput>
         </mat-form-field>
         <mat-form-field fxFlex appearance="outline">
             <mat-label>Prioridade</mat-label>
-            <mat-select>
+            <mat-select formControlName="priority">
                 <mat-option *ngFor="let p of priorities" [value]="p">
                     {{ p }}
                 </mat-option>
@@ -24,12 +28,12 @@
         </mat-form-field>
         <mat-form-field fxFlex appearance="outline">
             <mat-label>Dt. cadastro</mat-label>
-            <input matInput [matDatepicker]="picker">
+            <input formControlName="createdAt" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <div fxFlex>
-            <mat-checkbox>Apenas concluídos?</mat-checkbox>
+            <mat-checkbox formControlName="isDone">Apenas concluídos?</mat-checkbox>
         </div>
     </div>
 
