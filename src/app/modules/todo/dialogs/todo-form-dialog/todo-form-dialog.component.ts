@@ -6,7 +6,7 @@ import { ofType } from '@ngrx/effects';
 import { TodoModel, todoPriorities } from '../../../../models/todo.model';
 import * as RootStore from '../../../../../app/root-store';
 import {
-  saveTodo, selectTodoFormLoading, selectTodoFormError, TodoEffects, saveTodoSuccess
+  saveTodo, selectTodoFormLoading, selectTodoFormError, TodoEffects, saveTodoSuccess, saveTodoReset
 } from '../../../../../app/root-store/todo-feature';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
@@ -33,6 +33,12 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy {
     this.loading$ = this.store$.select(selectTodoFormLoading);
     this.error$ = this.store$.select(selectTodoFormError)
       .pipe(map((error) => error && error.message));
+
+    this.dialogRef.beforeClose()
+      .pipe(
+        untilDestroyed(this)
+      ).subscribe(() => this.store$.dispatch(saveTodoReset()))
+
     this.todoEffects.saveTodo$.pipe(
       ofType(saveTodoSuccess),
       untilDestroyed(this)

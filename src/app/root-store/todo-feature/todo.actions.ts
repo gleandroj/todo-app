@@ -9,6 +9,7 @@ export enum TodoActions {
     SAVE_TODO = '[Todo API] Save todo',
     SAVE_TODO_SUCCESS = '[Todo API] Save todo success',
     SAVE_TODO_ERROR = '[Todo API] Save todo error',
+    SAVE_TODO_RESET = '[Todo State] Save todo reset',
 }
 
 export const fetchTodo = createAction(
@@ -37,4 +38,8 @@ export const saveTodoSuccess = createAction(
 
 export const saveTodoError = createAction(
     TodoActions.SAVE_TODO_ERROR
+);
+
+export const saveTodoReset = createAction(
+    TodoActions.SAVE_TODO_RESET
 );

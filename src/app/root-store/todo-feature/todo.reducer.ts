@@ -1,5 +1,5 @@
 import { createReducer, on, ActionReducerMap } from '@ngrx/store';
-import { fetchTodo, fetchTodoError, fetchTodoSuccess, saveTodo, saveTodoSuccess, saveTodoError } from './todo.actions';
+import { fetchTodo, fetchTodoError, fetchTodoSuccess, saveTodo, saveTodoSuccess, saveTodoError, saveTodoReset } from './todo.actions';
 import { FeatureState, initialTodoState, initialTodoFormState } from './todo.state';
 
 const TodoError = (msg: string) => ({ message: msg });
@@ -14,7 +14,8 @@ const _todoReducer = createReducer(initialTodoState,
 const _todoFormReducer = createReducer(initialTodoFormState,
     on(saveTodo, (state) => ({ ...state, error: null, loading: true })),
     on(saveTodoSuccess, () => initialTodoFormState),
-    on(saveTodoError, (state) => ({ ...state, loading: false, error: defaultError }))
+    on(saveTodoError, (state) => ({ ...state, loading: false, error: defaultError })),
+    on(saveTodoReset, () => initialTodoFormState)
 );
 
 export function todoFormReducer(state, action) {
