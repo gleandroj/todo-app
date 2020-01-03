@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, delay } from 'rxjs/operators';
+import { catchError, delay, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { TodoModel, TodoPriority } from '../models/todo.model';
@@ -44,13 +44,23 @@ const testFilter = function (filter: Partial<TodoModel>) {
     providedIn: 'root'
 })
 export class TodoService {
+
     private resource = '/todo';
 
     constructor(private http: HttpClient) { }
 
     getAll(filter?: Partial<TodoModel>) {
-        //TODO: Remove delay
-        return this.http.get<TodoModel[]>(`${this.resource}`)
-            .pipe(catchError(() => of(testData.filter(testFilter(filter || {}))).pipe(delay(2000))));
+        return of([]).pipe(
+            delay(2000),
+            switchMap(() => this.http.get<TodoModel[]>(`${this.resource}`)
+                .pipe(catchError(() => of(testData.filter(testFilter(filter || {}))))))
+        );
+    }
+
+    save(todo: Partial<TodoModel>) {
+        return of([]).pipe(
+            delay(2000),
+            switchMap(() => this.http.post<TodoModel>(`${this.resource}`, todo))
+        );
     }
 }
