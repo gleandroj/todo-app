@@ -6,10 +6,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 
 import { TodoFeatureStoreModule } from './todo-feature/todo-feature.module';
+import { metaReducers } from './reducers';
 
 @NgModule({
     imports: [
-        StoreModule.forRoot({}),
+        StoreModule.forRoot({}, { metaReducers: metaReducers }),
         EffectsModule.forRoot([]),
         TodoFeatureStoreModule,
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
