@@ -24,7 +24,11 @@ export class TodoPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store$.dispatch(fetchTodo());
+    this.store$.dispatch(fetchTodo({}));
+  }
+
+  filter(filter: Partial<TodoModel>) {
+    this.store$.dispatch(fetchTodo({ filter: filter }))
   }
 
 }
