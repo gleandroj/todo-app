@@ -5,6 +5,22 @@
     position: relative;
     display: flex;
     flex-direction: row;
+
+    &.is-done {
+      background-color: rgb(251, 251, 251);
+    }
+
+    &.is-done::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      align-self: center;
+      background-color: rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: 50%;
+      right: 0;
+    }
   }
   .todo-body {
     display: flex;
@@ -64,6 +80,9 @@
       &.mat-checkbox-checked {
         .mat-checkbox-frame {
           border-color: transparent;
+        }
+        .mat-checkbox-background {
+          background-color: #ff4081 !important;
         }
       }
 
