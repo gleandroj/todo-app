@@ -55,9 +55,12 @@ body {
 
 @for $i from 1 through 100 {
   .push-#{$i} {
-    margin-bottom: #{$i}px;
+    margin-bottom: #{$i}px !important;
   }
   .push-#{$i}-l {
-    margin-left: #{$i}px;
+    margin-left: #{$i}px !important;
+  }
+  .push-#{$i}-r {
+    margin-right: #{$i}px !important;
   }
 }
