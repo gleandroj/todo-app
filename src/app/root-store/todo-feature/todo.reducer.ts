@@ -1,20 +1,12 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, ActionReducerMap } from '@ngrx/store';
 import { fetchTodo, fetchTodoError, fetchTodoSuccess } from './todo.actions';
-import { TodoModel } from '../../models/todo.model';
-
-export const TodoStateKey = 'todo-feature';
-
-export interface TodoSate {
-    data: TodoModel[],
-    loading: boolean,
-    error: any
-};
+import { State, FeatureState } from './todo.state';
 
 const TodoError = (msg: string) => ({ message: msg });
 
 const defaultError = TodoError(`Falha na comunicação com a API.`);
 
-export const initialState: TodoSate = {
+export const initialState: State = {
     data: [],
     loading: false,
     error: null
@@ -29,3 +21,7 @@ const _todoReducer = createReducer(initialState,
 export function todoReducer(state, action) {
     return _todoReducer(state, action);
 }
+
+export const reducers: ActionReducerMap<FeatureState> = {
+    todo: todoReducer
+};
