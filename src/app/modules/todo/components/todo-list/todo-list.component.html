@@ -2,5 +2,7 @@
     <ng-container *ngIf="loading">
         <app-todo-loading *ngFor="let i of maxViewItens"></app-todo-loading>
     </ng-container>
-    <app-todo *cdkVirtualFor="let todo of data" [todo]="todo"></app-todo>
+    <div [hidden]="loading">
+        <app-todo *cdkVirtualFor="let todo of data" [todo]="todo"></app-todo>
+    </div>
 </cdk-virtual-scroll-viewport>
