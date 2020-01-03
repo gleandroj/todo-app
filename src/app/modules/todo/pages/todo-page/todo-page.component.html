@@ -1,6 +1,6 @@
 <div class="todo-page-content">
     <app-todo-filter (filter)="filter($event)" class="push-10 "></app-todo-filter>
-    <app-todo-list [loading]="loading$ | async" [data]="todos$ | async"></app-todo-list>
+    <app-todo-list (todoClick)="todoClick($event)" [loading]="loading$ | async" [data]="todos$ | async"></app-todo-list>
 </div>
 
 <div class="mat-fab-container">

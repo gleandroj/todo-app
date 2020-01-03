@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoModel } from '../../../../models/todo.model';
 import { Store } from '@ngrx/store';
-import { RootStoreState } from 'src/app/root-store/state';
-import { selectTodoData, selectTodoLoading, selectTodoError } from 'src/app/root-store/todo-feature/todo.selectors';
 import { Observable } from 'rxjs';
-import { fetchTodo } from 'src/app/root-store/todo-feature/todo.actions';
+import { selectTodoData, selectTodoLoading, selectTodoError } from '../../../../../app/root-store/todo-feature/todo.selectors';
+import { fetchTodo } from '../../../../../app/root-store/todo-feature/todo.actions';
+import * as RootStore from '../../../../../app/root-store';
+import { TodoModel } from '../../../../models/todo.model';
 
 @Component({
   selector: 'app-todo-page',
@@ -17,7 +17,7 @@ export class TodoPageComponent implements OnInit {
   public loading$: Observable<boolean>;
   public error$: Observable<any>;
 
-  constructor(private store$: Store<RootStoreState>) {
+  constructor(private store$: Store<RootStore.State>) {
     this.loading$ = this.store$.select(selectTodoLoading);
     this.todos$ = this.store$.select(selectTodoData);
     this.error$ = this.store$.select(selectTodoError);
@@ -29,6 +29,10 @@ export class TodoPageComponent implements OnInit {
 
   filter(filter: Partial<TodoModel>) {
     this.store$.dispatch(fetchTodo({ filter: filter }))
+  }
+
+  todoClick(todo: TodoModel) {
+    console.log(todo);
   }
 
 }

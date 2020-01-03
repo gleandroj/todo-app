@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { TodoModel } from '../../../../models/todo.model';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
@@ -12,6 +12,7 @@ export class TodoListComponent implements OnInit {
   @Input() public data: TodoModel[] = [];
   @Input() public loading: boolean = false;
   @ViewChild(CdkVirtualScrollViewport, { static: true }) public viewPort: CdkVirtualScrollViewport;
+  @Output() todoClick: EventEmitter<TodoModel> = new EventEmitter();
 
   public itemSize = 90;
 
