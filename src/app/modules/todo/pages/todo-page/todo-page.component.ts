@@ -36,7 +36,7 @@ export class TodoPageComponent implements OnInit {
   }
 
   todoClick(todo: TodoModel) {
-    console.log(todo);
+    //this.store$.dispatch(editTodo(todo))
   }
 
 }

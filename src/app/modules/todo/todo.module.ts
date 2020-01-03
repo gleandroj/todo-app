@@ -24,15 +24,18 @@ import { TodoComponent } from './components/todo/todo.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoFilterComponent } from './components/todo-filter/todo-filter.component';
 import { TodoLoadingComponent } from './components/todo-loading/todo-loading.component';
+import { TodoFormDialogComponent } from './dialogs/todo-form-dialog/todo-form-dialog.component';
 
 @NgModule({
+  entryComponents: [TodoFormDialogComponent],
   declarations: [
     TodoPageComponent,
     TodoLayoutComponent,
     TodoComponent,
     TodoListComponent,
     TodoFilterComponent,
-    TodoLoadingComponent
+    TodoLoadingComponent,
+    TodoFormDialogComponent
   ],
   imports: [
     CommonModule,

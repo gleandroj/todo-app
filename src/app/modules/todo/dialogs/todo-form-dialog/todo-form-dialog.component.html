@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Todo Form</h2>
+<mat-dialog-content [formGroup]="form" fxLayout="column">
+    <mat-form-field fxFlex appearance="outline">
+        <mat-label>Título</mat-label>
+        <input formControlName="title" matInput>
+    </mat-form-field>
+    <mat-form-field fxFlex appearance="outline">
+        <mat-label>Descrição</mat-label>
+        <input formControlName="description" matInput>
+    </mat-form-field>
+    <mat-form-field fxFlex appearance="outline">
+        <mat-label>Prioridade</mat-label>
+        <mat-select formControlName="priority">
+            <mat-option *ngFor="let p of priorities" [value]="p">
+                {{ p }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex appearance="outline">
+        <mat-label>Dt. cadastro</mat-label>
+        <input formControlName="createdAt" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div fxFlex>
+        <mat-checkbox formControlName="isDone">Concluído?</mat-checkbox>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Fechar</button>
+    <button mat-button>Salvar</button>
+</mat-dialog-actions>
