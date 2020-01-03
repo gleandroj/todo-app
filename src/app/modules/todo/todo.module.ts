@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -51,6 +51,7 @@ import { TodoLoadingComponent } from './components/todo-loading/todo-loading.com
     MatNativeDateModule,
     MatDatepickerModule,
     ScrollingModule,
+    ReactiveFormsModule,
     TodoRoutingModule
   ]
 })
