@@ -10,4 +10,23 @@ export class TodoModel {
         public createdAt: Date,
         public isDone: boolean
     ) { }
+
+    static fromObject(value: any) {
+        const {
+            _id,
+            title,
+            description,
+            priority,
+            createdAt,
+            isDone
+        } = value;
+        return new TodoModel(
+            _id,
+            title,
+            description,
+            priority,
+            createdAt,
+            isDone
+        );
+    }
 }
