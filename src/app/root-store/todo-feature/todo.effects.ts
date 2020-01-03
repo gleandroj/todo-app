@@ -10,7 +10,7 @@ export class TodoEffects {
 
     loadTodos$ = createEffect(() => this.actions$.pipe(
         ofType(fetchTodo),
-        mergeMap(() => this.todoService.getAll().pipe(
+        mergeMap((action) => this.todoService.getAll(action.filter).pipe(
             switchMap(data => of(fetchTodoSuccess({ payload: data }))),
             catchError(() => of(fetchTodoError()))
         )))

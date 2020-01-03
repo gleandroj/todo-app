@@ -8,7 +8,8 @@ export enum TodoPageActions {
 }
 
 export const fetchTodo = createAction(
-    TodoPageActions.FETCH_TODO
+    TodoPageActions.FETCH_TODO,
+    props<{ filter?: Partial<TodoModel> }>()
 );
 
 export const fetchTodoSuccess = createAction(
