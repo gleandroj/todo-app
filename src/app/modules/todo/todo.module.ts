@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -42,6 +43,7 @@ import { TodoFilterComponent } from './components/todo-filter/todo-filter.compon
     MatRippleModule,
     MatInputModule,
     MatFormFieldModule,
+    MatExpansionModule,
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,

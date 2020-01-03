@@ -1,17 +1,20 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Filtro</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <mat-form-field appearance="outline">
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Filtro
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <mat-form-field fxFlex appearance="outline">
             <mat-label>Título</mat-label>
             <input matInput>
         </mat-form-field>
-        <mat-form-field class="push-20-l" appearance="outline">
+        <mat-form-field fxFlex appearance="outline">
             <mat-label>Descrição</mat-label>
             <input matInput>
         </mat-form-field>
-        <mat-form-field class="push-20-l" appearance="outline">
+        <mat-form-field fxFlex appearance="outline">
             <mat-label>Prioridade</mat-label>
             <mat-select>
                 <mat-option *ngFor="let p of priorities" [value]="p">
@@ -19,11 +22,12 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field class="push-20-l" appearance="outline">
+        <mat-form-field fxFlex appearance="outline">
             <mat-label>Dt. cadastro</mat-label>
             <input matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-    </mat-card-content>
-</mat-card>
+    </div>
+
+</mat-expansion-panel>
