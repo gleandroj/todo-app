@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectTodoData, selectTodoLoading, selectTodoError } from '../../../../../app/root-store/todo-feature/todo.selectors';
-import { fetchTodo } from '../../../../../app/root-store/todo-feature/todo.actions';
-import * as RootStore from '../../../../../app/root-store';
 import { TodoModel } from '../../../../models/todo.model';
+import {
+  selectTodoData,
+  selectTodoLoading,
+  selectTodoError,
+  fetchTodo
+} from '../../../../../app/root-store/todo-feature';
+import * as RootStore from '../../../../../app/root-store';
 
 @Component({
   selector: 'app-todo-page',
