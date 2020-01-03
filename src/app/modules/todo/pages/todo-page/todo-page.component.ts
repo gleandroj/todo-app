@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from '../../todo';
-
-const bigDescription = (new Array(100))
-  .fill(() => { }).map((a, i) => `${i}`).join('');
-
-const testData = (new Array(10))
-  .fill(() => { })
-  .map((a, i) => (new Todo(`Todo ${++i}`, `Description ${i} ${bigDescription}`, 5, new Date(), false)));
+import { TodoModel } from '../../../../models/todo.model';
+import { Store } from '@ngrx/store';
+import { RootStoreState } from 'src/app/root-store/state';
+import { selectTodoData, selectTodoLoading, selectTodoError } from 'src/app/root-store/todo-feature/todo.selectors';
+import { Observable } from 'rxjs';
+import { fetchTodo } from 'src/app/root-store/todo-feature/todo.actions';
 
 @Component({
   selector: 'app-todo-page',
@@ -15,11 +13,18 @@ const testData = (new Array(10))
 })
 export class TodoPageComponent implements OnInit {
 
-  public todos: Todo[] = testData;
+  public todos$: Observable<TodoModel[]>;
+  public loading$: Observable<boolean>;
+  public error$: Observable<any>;
 
-  constructor() { }
+  constructor(private store$: Store<RootStoreState>) {
+    this.loading$ = this.store$.select(selectTodoLoading);
+    this.todos$ = this.store$.select(selectTodoData);
+    this.error$ = this.store$.select(selectTodoError);
+  }
 
   ngOnInit() {
+    this.store$.dispatch(fetchTodo());
   }
 
 }

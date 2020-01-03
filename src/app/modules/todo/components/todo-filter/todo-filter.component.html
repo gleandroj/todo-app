@@ -5,7 +5,7 @@
         </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap.gt-sm="10px">
         <mat-form-field fxFlex appearance="outline">
             <mat-label>Título</mat-label>
             <input matInput>
@@ -28,6 +28,9 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+        <div fxFlex>
+            <mat-checkbox>Apenas concluídos?</mat-checkbox>
+        </div>
     </div>
 
 </mat-expansion-panel>

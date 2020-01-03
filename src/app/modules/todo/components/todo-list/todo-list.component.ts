@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Todo } from '../../todo';
+import { TodoModel } from '../../../../models/todo.model';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,7 +8,7 @@ import { Todo } from '../../todo';
 })
 export class TodoListComponent implements OnInit {
 
-  @Input() public data: Todo[] = [];
+  @Input() public data: TodoModel[] = [];
 
   constructor() { }
 

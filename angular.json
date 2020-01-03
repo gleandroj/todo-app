@@ -151,5 +151,8 @@
       }
     }
   },
-  "defaultProject": "todoApp"
+  "defaultProject": "todoApp",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
