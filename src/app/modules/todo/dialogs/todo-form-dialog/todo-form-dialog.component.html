@@ -1,8 +1,15 @@
 <h2 mat-dialog-title>{{ todo?.title ? todo.title : 'Cadastrar Tarefa' }}</h2>
+<mat-progress-bar *ngIf="loading$ | async" class="push-10" mode="indeterminate"></mat-progress-bar>
 <mat-dialog-content [formGroup]="form" fxLayout="column">
+    <mat-error class="push-10">
+        {{ error$ | async }}
+    </mat-error>
     <mat-form-field fxFlex appearance="outline">
         <mat-label>Título</mat-label>
         <input formControlName="title" matInput>
+        <mat-error>
+            O título é obrigatório.
+        </mat-error>
     </mat-form-field>
     <mat-form-field fxFlex appearance="outline">
         <mat-label>Descrição</mat-label>
@@ -15,6 +22,9 @@
                 {{ p }}
             </mat-option>
         </mat-select>
+        <mat-error>
+            A prioridade é obrigatória.
+        </mat-error>
     </mat-form-field>
     <mat-form-field fxFlex appearance="outline">
         <mat-label>Dt. cadastro</mat-label>
@@ -28,5 +38,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Fechar</button>
-    <button mat-button [disabled]="form.invalid">Salvar</button>
+    <button mat-button [disabled]="form.invalid" (click)="save()">Salvar</button>
 </mat-dialog-actions>
