@@ -3,14 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, delay } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { TodoModel } from '../models/todo.model';
+import { TodoModel, TodoPriority } from '../models/todo.model';
+
+const randomDate = (start: Date, end: Date) => (new Date(+start + Math.random() * (+end - +start)))
 
 const bigDescription = (new Array(100))
     .fill(() => { }).map((a, i) => `${i}`).join('');
 
 const testData = (new Array(10))
     .fill(() => { })
-    .map((a, i) => (new TodoModel(i, `Todo ${++i}`, `Description ${i} ${bigDescription}`, 5, new Date(), false)));
+    .map((a, i) =>
+        (new TodoModel(
+            i,
+            `Todo ${++i}`, `Description ${i} ${bigDescription}`,
+            (Math.floor(Math.random() * 5) + 1) as TodoPriority,
+            randomDate(new Date(2019, 1, 1), new Date(2020, 12, 31)),
+            Math.random() >= 0.5
+        ))
+    );
 
 const applyFilter = (filter, value) => {
     if (!filter) return true;
