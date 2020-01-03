@@ -7,6 +7,6 @@ export class TodoModel {
         public description: string,
         public priority: TodoPriority,
         public createdAt: Date,
-        public done: boolean
+        public isDone: boolean
     ) { }
 }
