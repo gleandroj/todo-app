@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, delay } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { TodoModel } from '../models/todo.model';
@@ -21,7 +21,8 @@ export class TodoService {
     constructor(private http: HttpClient) { }
 
     getAll() {
+        //TODO: Remove delay
         return this.http.get<TodoModel[]>(`${this.resource}`)
-            .pipe(catchError(() => of(testData)));
+            .pipe(catchError(() => of(testData).pipe(delay(2000))));
     }
 }

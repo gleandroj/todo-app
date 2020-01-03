@@ -1,3 +1,6 @@
-<cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+<cdk-virtual-scroll-viewport #content [itemSize]="itemSize" class="viewport">
+    <ng-container *ngIf="loading">
+        <app-todo-loading *ngFor="let i of maxViewItens"></app-todo-loading>
+    </ng-container>
     <app-todo *cdkVirtualFor="let todo of data" [todo]="todo"></app-todo>
 </cdk-virtual-scroll-viewport>

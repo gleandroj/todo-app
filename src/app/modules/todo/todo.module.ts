@@ -23,6 +23,7 @@ import { TodoLayoutComponent } from './components/todo-layout/todo-layout.compon
 import { TodoComponent } from './components/todo/todo.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoFilterComponent } from './components/todo-filter/todo-filter.component';
+import { TodoLoadingComponent } from './components/todo-loading/todo-loading.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TodoFilterComponent } from './components/todo-filter/todo-filter.compon
     TodoLayoutComponent,
     TodoComponent,
     TodoListComponent,
-    TodoFilterComponent
+    TodoFilterComponent,
+    TodoLoadingComponent
   ],
   imports: [
     CommonModule,

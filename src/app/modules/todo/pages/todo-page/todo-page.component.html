@@ -1,9 +1,6 @@
 <div class="todo-page-content">
     <app-todo-filter class="push-10 "></app-todo-filter>
-    <app-todo-list [data]="todos$ | async"></app-todo-list>
-    <div *ngIf="loading$ | async">
-        Carregando...
-    </div>
+    <app-todo-list [loading]="loading$ | async" [data]="todos$ | async"></app-todo-list>
 </div>
 
 <div class="mat-fab-container">
