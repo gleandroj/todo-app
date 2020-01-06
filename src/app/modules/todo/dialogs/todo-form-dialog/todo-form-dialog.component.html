@@ -1,4 +1,11 @@
-<h2 mat-dialog-title>{{ todo?.title ? todo.title : 'Cadastrar Tarefa' }}</h2>
+<div mat-dialog-title fxLayout="row" fxLayoutAlign="start center">
+    <span fxFlex>{{ todo?.title || 'Cadastrar Tarefa' }}</span>
+
+    <button *ngIf="mode === 'update'" [disabled]="form.disabled" matTooltip="Deletar" mat-button mat-icon-button
+        color="accent" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>
 <mat-progress-bar *ngIf="loading$ | async" class="push-10" mode="indeterminate"></mat-progress-bar>
 <mat-dialog-content [formGroup]="form" fxLayout="column">
     <mat-error class="push-10">
@@ -37,6 +44,7 @@
     </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Fechar</button>
-    <button mat-button [disabled]="form.invalid" (click)="save()">Salvar</button>
+    <button mat-button mat-dialog-close [disabled]="form.disabled">Fechar</button>
+    <button style="justify-self: end;" mat-button mat-raised-button color="primary"
+        [disabled]="form.invalid || form.disabled" (click)="save()">Salvar</button>
 </mat-dialog-actions>

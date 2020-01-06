@@ -10,6 +10,10 @@ export enum TodoActions {
     SAVE_TODO_SUCCESS = '[Todo API] Save todo success',
     SAVE_TODO_ERROR = '[Todo API] Save todo error',
     SAVE_TODO_RESET = '[Todo State] Save todo reset',
+
+    DELETE_TODO = '[Todo API] Delete todo',
+    DELETE_TODO_SUCCESS = '[Todo API] Delete todo success',
+    DELETE_TODO_ERROR = '[Todo API] Delete todo error'
 }
 
 export const fetchTodo = createAction(
@@ -43,3 +47,17 @@ export const saveTodoError = createAction(
 export const saveTodoReset = createAction(
     TodoActions.SAVE_TODO_RESET
 );
+
+export const deleteTodo = createAction(
+    TodoActions.DELETE_TODO,
+    props<{ todo: TodoModel }>()
+);
+
+export const deleteTodoSuccess = createAction(
+    TodoActions.DELETE_TODO_SUCCESS
+);
+
+export const deleteTodoError = createAction(
+    TodoActions.DELETE_TODO_ERROR
+);
+

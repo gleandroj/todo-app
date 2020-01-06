@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
 import { switchMap, mergeMap, catchError } from 'rxjs/operators';
 import { TodoService } from '../../services/todo.service';
-import { fetchTodoSuccess, fetchTodoError, fetchTodo, saveTodo, saveTodoSuccess, saveTodoError } from './todo.actions';
-import { of } from 'rxjs';
+import {
+    fetchTodoSuccess,
+    fetchTodoError,
+    fetchTodo,
+    saveTodo,
+    saveTodoSuccess,
+    saveTodoError,
+    deleteTodo,
+    deleteTodoSuccess,
+    deleteTodoError
+} from './todo.actions';
 
 @Injectable()
 export class TodoEffects {
@@ -21,6 +31,14 @@ export class TodoEffects {
         mergeMap((action) => this.todoService.save(action.todo).pipe(
             switchMap(todo => of(saveTodoSuccess({ todo }))),
             catchError(() => of(saveTodoError()))
+        )))
+    );
+
+    deleteTodo$ = createEffect(() => this.actions$.pipe(
+        ofType(deleteTodo),
+        mergeMap(({ todo }) => this.todoService.delete(todo).pipe(
+            switchMap(() => of(deleteTodoSuccess())),
+            catchError(() => of(deleteTodoError()))
         )))
     );
 

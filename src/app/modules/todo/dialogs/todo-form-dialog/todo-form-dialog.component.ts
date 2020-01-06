@@ -6,11 +6,19 @@ import { ofType } from '@ngrx/effects';
 import { TodoModel, todoPriorities } from '../../../../models/todo.model';
 import * as RootStore from '../../../../../app/root-store';
 import {
-  saveTodo, selectTodoFormLoading, selectTodoFormError, TodoEffects, saveTodoSuccess, saveTodoReset
+  saveTodo,
+  saveTodoReset,
+  deleteTodo,
+  selectTodoFormLoading,
+  selectTodoFormError,
+  TodoEffects,
+  saveTodoSuccess,
+  deleteTodoSuccess
 } from '../../../../../app/root-store/todo-feature';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { showToast } from 'src/app/root-store/root.actions';
 
 @Component({
   selector: 'app-todo-form-dialog',
@@ -22,6 +30,7 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy {
   public priorities = todoPriorities;
   public loading$: Observable<boolean>;
   public error$: Observable<any>;
+  public mode: "create" | "update";
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +39,7 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<TodoFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public todo: Partial<TodoModel>
   ) {
+    this.mode = this.todo._id ? "update" : "create";
     this.loading$ = this.store$.select(selectTodoFormLoading);
     this.error$ = this.store$.select(selectTodoFormError)
       .pipe(map((error) => error && error.message));
@@ -42,7 +52,12 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy {
     this.todoEffects.saveTodo$.pipe(
       ofType(saveTodoSuccess),
       untilDestroyed(this)
-    ).subscribe(() => this.dialogRef.close());
+    ).subscribe(() => this.close(`Tarefa ${!this.todo._id ? 'cadastrada' : 'atualizada'} com sucesso!`));
+
+    this.todoEffects.deleteTodo$.pipe(
+      ofType(deleteTodoSuccess),
+      untilDestroyed(this)
+    ).subscribe(() => this.close(`Tarefa deletada com sucesso!`));
   }
 
   ngOnInit() {
@@ -64,6 +79,13 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() { }
 
+  close(msg?: string) {
+    if (msg) this.store$.dispatch(
+      showToast({ message: msg })
+    );
+    this.dialogRef.close();
+  }
+
   save() {
     const { value } = this.form;
     const todo = TodoModel.fromObject(value);
@@ -72,4 +94,12 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy {
     );
   }
 
+  delete() {
+    if (this.mode === "update") {
+      const todo = this.todo as TodoModel;
+      this.store$.dispatch(
+        deleteTodo({ todo })
+      );
+    }
+  }
 }

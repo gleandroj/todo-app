@@ -60,7 +60,16 @@ export class TodoService {
     save(todo: Partial<TodoModel>) {
         return of([]).pipe(
             delay(2000),
-            switchMap(() => this.http.post<TodoModel>(`${this.resource}`, todo))
+            //switchMap(() => this.http.post<TodoModel>(`${this.resource}`, todo))
+            switchMap(() => of(todo))
+        );
+    }
+
+    delete(todo: TodoModel) {
+        return of([]).pipe(
+            delay(2000),
+            switchMap(() => of(todo))
+            //switchMap(() => this.http.delete(`${this.resource}/${todo._id}`))
         );
     }
 }
