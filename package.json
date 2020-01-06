@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "husky": {
     "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "scripts": {
-    "commit": "git-cz",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
