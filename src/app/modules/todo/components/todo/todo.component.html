@@ -1,15 +1,15 @@
-<mat-card class="mat-typography" [class.is-done]="todo.isDone" matRipple>
+<mat-card class="mat-typography" [class.is-done]="todo?.isDone" matRipple>
     <div class="left-action">
-        <mat-checkbox [checked]="todo.isDone" [disabled]="true" class="done"></mat-checkbox>
+        <mat-checkbox [checked]="todo?.isDone" [disabled]="true" class="done"></mat-checkbox>
     </div>
     <div class="todo-body">
-        <span class="mat-title todo-title truncate">{{ todo.title }}</span>
-        <span class="mat-body truncate">{{ todo.description }}</span>
+        <span class="mat-title todo-title truncate">{{ todo?.title }}</span>
+        <span class="mat-body truncate">{{ todo?.description }}</span>
     </div>
     <div class="right-action">
-        <span>{{ todo.createdAt | date: 'dd/MM/yyyy' }}</span>
+        <span>{{ todo?.createdAt | date: 'dd/MM/yyyy' }}</span>
     </div>
     <div class="todo-priority">
-        <span>{{ todo.priority }}</span>
+        <span>{{ todo?.priority }}</span>
     </div>
 </mat-card>
