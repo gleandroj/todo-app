@@ -34,19 +34,8 @@ export const metaReducers: MetaReducer<{}>[] = !environment.production
     ? [logger]
     : [];
 
-const MOBILE_MAX_WIDTH = 425;
-const TABLET_MAX_WIDTH = 1024;
-
 const _screenReducer = createReducer<ScreenState>(initialScreenState,
-    on(setScreen, (state, { width }) => {
-        const tablet = width <= TABLET_MAX_WIDTH && width > MOBILE_MAX_WIDTH;
-        const mobile = width <= MOBILE_MAX_WIDTH;
-        return {
-            desktop: !mobile && !tablet,
-            tablet,
-            mobile
-        };
-    })
+    on(setScreen, (rules) => ({ ...rules }))
 );
 
 export function screenReducer(state, action) {

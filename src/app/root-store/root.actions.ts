@@ -19,5 +19,5 @@ export const showToastSuccess = createAction(
 
 export const setScreen = createAction(
     RootActions.SET_SCREEN,
-    props<{ width: number }>()
+    props<{ desktop: boolean; tablet: boolean; mobile: boolean; }>()
 );

@@ -7,10 +7,12 @@ import { environment } from '../../environments/environment';
 import { TodoFeatureStoreModule } from './todo-feature/todo-feature.module';
 import { RootEffects } from './root.effects';
 import { metaReducers, reducers } from './root.reducers';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
     imports: [
         MatSnackBarModule,
+        LayoutModule,
         StoreModule.forRoot(reducers, { metaReducers: metaReducers }),
         EffectsModule.forRoot([RootEffects]),
         TodoFeatureStoreModule,
