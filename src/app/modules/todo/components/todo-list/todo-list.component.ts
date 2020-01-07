@@ -20,7 +20,7 @@ export class TodoListComponent implements OnInit {
 
   get maxViewItens() {
     const size = Math.floor(this.viewPort.getViewportSize() / this.itemSize);
-    return (new Array(size)).fill(() => { });
+    return size > 0 ? (new Array(size)).fill(() => { }) : [];
   }
 
   ngOnInit() {
