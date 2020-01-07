@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, AfterViewInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -11,13 +11,13 @@ import {
   deleteTodo,
   selectTodoFormLoading,
   selectTodoFormError,
-  TodoEffects,
   saveTodoSuccess,
   deleteTodoSuccess
 } from '../../../../../app/root-store/todo-feature';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Actions } from '@ngrx/effects';
 import { showToast } from 'src/app/root-store/root.actions';
 
 @Component({
@@ -25,7 +25,7 @@ import { showToast } from 'src/app/root-store/root.actions';
   templateUrl: './todo-form-dialog.component.html',
   styleUrls: ['./todo-form-dialog.component.scss']
 })
-export class TodoFormDialogComponent implements OnInit, OnDestroy {
+export class TodoFormDialogComponent implements OnInit, OnDestroy, AfterViewInit {
   public form: FormGroup;
   public priorities = todoPriorities;
   public loading$: Observable<boolean>;
@@ -35,8 +35,8 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private store$: Store<RootStore.State>,
-    private todoEffects: TodoEffects,
-    public dialogRef: MatDialogRef<TodoFormDialogComponent>,
+    private dialogRef: MatDialogRef<TodoFormDialogComponent>,
+    private actions$: Actions,
     @Inject(MAT_DIALOG_DATA) public todo: Partial<TodoModel>
   ) {
     this.mode = this.todo._id ? "update" : "create";
@@ -49,12 +49,12 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy {
         untilDestroyed(this)
       ).subscribe(() => this.store$.dispatch(saveTodoReset()))
 
-    this.todoEffects.saveTodo$.pipe(
+    this.actions$.pipe(
       ofType(saveTodoSuccess),
       untilDestroyed(this)
     ).subscribe(() => this.close(`Tarefa ${!this.todo._id ? 'cadastrada' : 'atualizada'} com sucesso!`));
 
-    this.todoEffects.deleteTodo$.pipe(
+    this.actions$.pipe(
       ofType(deleteTodoSuccess),
       untilDestroyed(this)
     ).subscribe(() => this.close(`Tarefa deletada com sucesso!`));
@@ -70,11 +70,13 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy {
       isDone: [this.todo.isDone]
     });
 
-    this.form.get('createdAt').disable();
-
     this.loading$
       .pipe(untilDestroyed(this))
       .subscribe(loading => loading ? this.form.disable() : this.form.enable());
+  }
+
+  ngAfterViewInit() {
+    this.form.controls['createdAt'].disable();
   }
 
   ngOnDestroy() { }

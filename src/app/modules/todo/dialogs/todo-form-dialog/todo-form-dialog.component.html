@@ -35,7 +35,7 @@
     </mat-form-field>
     <mat-form-field fxFlex appearance="outline">
         <mat-label>Dt. cadastro</mat-label>
-        <input formControlName="createdAt" matInput [matDatepicker]="picker">
+        <input [attr.disabled]="true" formControlName="createdAt" matInput [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

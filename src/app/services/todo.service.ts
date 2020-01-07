@@ -5,23 +5,6 @@ import { of } from 'rxjs';
 
 import { TodoModel, TodoPriority } from '../models/todo.model';
 
-const randomDate = (start: Date, end: Date) => (new Date(+start + Math.random() * (+end - +start)))
-
-const bigDescription = (new Array(10))
-    .fill(() => { }).map((a, i) => `${i}`).join('');
-
-const testData = (new Array(10))
-    .fill(() => { })
-    .map((a, i) =>
-        (new TodoModel(
-            i,
-            `Todo ${++i}`, `Description ${i} ${bigDescription}`,
-            (Math.floor(Math.random() * 5) + 1) as TodoPriority,
-            randomDate(new Date(2019, 1, 1), new Date(2020, 12, 31)),
-            Math.random() >= 0.5
-        ))
-    );
-
 const applyFilter = (filter, value) => {
     if (!filter) return true;
     if (typeof value === "string") return value && value.toLocaleLowerCase().indexOf(filter && filter.toLocaleLowerCase()) > -1;
@@ -45,31 +28,32 @@ const testFilter = function (filter: Partial<TodoModel>) {
 })
 export class TodoService {
 
-    private resource = '/todo';
+    private resource = '/api/todo';
 
     constructor(private http: HttpClient) { }
 
     getAll(filter?: Partial<TodoModel>) {
-        return of([]).pipe(
-            delay(2000),
-            switchMap(() => this.http.get<TodoModel[]>(`${this.resource}`)
-                .pipe(catchError(() => of(testData.filter(testFilter(filter || {}))))))
-        );
+        const params = new URLSearchParams();
+        Object.entries(filter || {}).forEach(item => {
+            if (item[1] instanceof Date) {
+                params.append(item[0], item[1].toISOString());
+            } else if (item[1] != null) {
+                params.append(item[0], item[1].toString());
+            }
+        });
+        return this.http.get<TodoModel[]>(`${this.resource}?${params}`);
     }
 
     save(todo: Partial<TodoModel>) {
-        return of([]).pipe(
-            delay(2000),
-            //switchMap(() => this.http.post<TodoModel>(`${this.resource}`, todo))
-            switchMap(() => of(todo))
-        );
+        console.log(`Save: ${JSON.stringify(todo)}`);
+
+        if (todo._id) {
+            return this.http.put<TodoModel>(`${this.resource}/${todo._id}`, todo);
+        }
+        return this.http.post<TodoModel>(`${this.resource}`, todo);
     }
 
     delete(todo: TodoModel) {
-        return of([]).pipe(
-            delay(2000),
-            switchMap(() => of(todo))
-            //switchMap(() => this.http.delete(`${this.resource}/${todo._id}`))
-        );
+        return this.http.delete(`${this.resource}/${todo._id}`);
     }
 }
