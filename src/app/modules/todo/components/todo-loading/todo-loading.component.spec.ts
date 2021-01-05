@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TodoLoadingComponent } from './todo-loading.component';
 import { MatCardModule } from '@angular/material/card';
@@ -7,7 +7,7 @@ describe('TodoLoadingComponent', () => {
   let component: TodoLoadingComponent;
   let fixture: ComponentFixture<TodoLoadingComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         MatCardModule

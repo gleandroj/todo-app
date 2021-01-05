@@ -44,7 +44,7 @@ export class TodoFormDialogComponent implements OnInit, OnDestroy, AfterViewInit
     this.error$ = this.store$.select(selectTodoFormError)
       .pipe(map((error) => error && error.message));
 
-    this.dialogRef.beforeClose()
+    this.dialogRef.beforeClosed()
       .pipe(
         untilDestroyed(this)
       ).subscribe(() => this.store$.dispatch(saveTodoReset()))

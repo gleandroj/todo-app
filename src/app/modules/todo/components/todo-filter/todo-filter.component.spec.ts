@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TodoFilterComponent } from './todo-filter.component';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -16,7 +16,7 @@ describe('TodoFilterComponent', () => {
   let component: TodoFilterComponent;
   let fixture: ComponentFixture<TodoFilterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         MatNativeDateModule,
