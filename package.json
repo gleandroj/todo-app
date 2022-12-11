@@ -41,7 +41,7 @@
     "@ngrx/store": "^11.0.0-beta.0",
     "@ngrx/store-devtools": "^11.0.0-beta.0",
     "@nguniversal/express-engine": "^11.0.1",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.10",
     "ngx-take-until-destroy": "^5.4.0",
